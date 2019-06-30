@@ -1,0 +1,61 @@
+cabal-version:       2.4
+name:                gpemu2
+version:             0.1.0.0
+license:             BSD-3-Clause
+license-file:        LICENSE
+author:              Matthew Bauer
+maintainer:          mjbauer95@gmail.com
+category:            Game
+extra-source-files:  CHANGELOG.md
+
+library
+  exposed-modules:     Libretro.Core
+                     , Libretro.CFFI
+                     , Libretro.Downloader
+  other-extensions:    ForeignFunctionInterface
+  ghc-options: -Wall
+  build-depends:       base >= 4 && < 5
+                     , bytestring >= 0.10 && < 0.11
+                     , containers
+                     , data-default >= 0.1 && < 1
+                     , filepath >= 1.4 && < 2
+                     , process
+                     , split
+                     , unix >= 2.7 && < 3
+  default-language:    Haskell2010
+
+executable exe
+  main-is:             Main.hs
+  hs-source-dirs:      exe
+  ghc-options: -Wall
+  build-depends:       base >= 4 && < 5
+                     , bytestring >= 0.10 && < 0.11
+                     , data-default >= 0.1 && < 1
+                     , filepath >= 1.4 && < 2
+                     , unix >= 2.7 && < 3
+                     , gpemu2
+                     , time
+                     , directory
+                     , jsaddle
+                     , jsaddle-webkit2gtk
+  default-language:    Haskell2010
+
+test-suite core-tests
+  default-language: Haskell2010
+  type: exitcode-stdio-1.0
+  hs-source-dirs: tests
+  main-is: Tests.hs
+  ghc-options: -Wall -threaded -rtsopts
+  other-modules:       Properties
+  build-depends:       base >= 4 && < 5
+                     , bytestring >= 0.10 && < 0.11
+                     , QuickCheck >= 2.10.0.1 && < 2.14
+                     , gpemu2
+                     , tasty
+                     , tasty-quickcheck
+                     , data-default >= 0.1 && < 1
+                     , filepath >= 1.4 && < 2
+
+source-repository head
+  type:     git
+  location: git://github.com/matthewbauer/gpemu2.git
